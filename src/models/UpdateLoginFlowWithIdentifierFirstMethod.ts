@@ -14,59 +14,51 @@
 
 import { mapValues } from '../runtime';
 /**
- * Update Login Flow with WebAuthn Method
+ * Update Login Flow with Multi-Step Method
  * @export
- * @interface UpdateLoginFlowWithWebAuthnMethod
+ * @interface UpdateLoginFlowWithIdentifierFirstMethod
  */
-export interface UpdateLoginFlowWithWebAuthnMethod {
+export interface UpdateLoginFlowWithIdentifierFirstMethod {
     /**
      * Sending the anti-csrf token is only required for browser login flows.
      * @type {string}
-     * @memberof UpdateLoginFlowWithWebAuthnMethod
+     * @memberof UpdateLoginFlowWithIdentifierFirstMethod
      */
     csrf_token?: string;
     /**
      * Identifier is the email or username of the user trying to log in.
      * @type {string}
-     * @memberof UpdateLoginFlowWithWebAuthnMethod
+     * @memberof UpdateLoginFlowWithIdentifierFirstMethod
      */
     identifier: string;
     /**
-     * Method should be set to "webAuthn" when logging in using the WebAuthn strategy.
+     * Method should be set to "password" when logging in using the identifier and password strategy.
      * @type {string}
-     * @memberof UpdateLoginFlowWithWebAuthnMethod
+     * @memberof UpdateLoginFlowWithIdentifierFirstMethod
      */
     method: string;
     /**
      * Transient data to pass along to any webhooks
      * @type {object}
-     * @memberof UpdateLoginFlowWithWebAuthnMethod
+     * @memberof UpdateLoginFlowWithIdentifierFirstMethod
      */
     transient_payload?: object;
-    /**
-     * Login a WebAuthn Security Key
-     * 
-     * This must contain the ID of the WebAuthN connection.
-     * @type {string}
-     * @memberof UpdateLoginFlowWithWebAuthnMethod
-     */
-    webauthn_login?: string;
 }
 
 /**
- * Check if a given object implements the UpdateLoginFlowWithWebAuthnMethod interface.
+ * Check if a given object implements the UpdateLoginFlowWithIdentifierFirstMethod interface.
  */
-export function instanceOfUpdateLoginFlowWithWebAuthnMethod(value: object): value is UpdateLoginFlowWithWebAuthnMethod {
+export function instanceOfUpdateLoginFlowWithIdentifierFirstMethod(value: object): value is UpdateLoginFlowWithIdentifierFirstMethod {
     if (!('identifier' in value) || value['identifier'] === undefined) return false;
     if (!('method' in value) || value['method'] === undefined) return false;
     return true;
 }
 
-export function UpdateLoginFlowWithWebAuthnMethodFromJSON(json: any): UpdateLoginFlowWithWebAuthnMethod {
-    return UpdateLoginFlowWithWebAuthnMethodFromJSONTyped(json, false);
+export function UpdateLoginFlowWithIdentifierFirstMethodFromJSON(json: any): UpdateLoginFlowWithIdentifierFirstMethod {
+    return UpdateLoginFlowWithIdentifierFirstMethodFromJSONTyped(json, false);
 }
 
-export function UpdateLoginFlowWithWebAuthnMethodFromJSONTyped(json: any, ignoreDiscriminator: boolean): UpdateLoginFlowWithWebAuthnMethod {
+export function UpdateLoginFlowWithIdentifierFirstMethodFromJSONTyped(json: any, ignoreDiscriminator: boolean): UpdateLoginFlowWithIdentifierFirstMethod {
     if (json == null) {
         return json;
     }
@@ -76,11 +68,10 @@ export function UpdateLoginFlowWithWebAuthnMethodFromJSONTyped(json: any, ignore
         'identifier': json['identifier'],
         'method': json['method'],
         'transient_payload': json['transient_payload'] == null ? undefined : json['transient_payload'],
-        'webauthn_login': json['webauthn_login'] == null ? undefined : json['webauthn_login'],
     };
 }
 
-export function UpdateLoginFlowWithWebAuthnMethodToJSON(value?: UpdateLoginFlowWithWebAuthnMethod | null): any {
+export function UpdateLoginFlowWithIdentifierFirstMethodToJSON(value?: UpdateLoginFlowWithIdentifierFirstMethod | null): any {
     if (value == null) {
         return value;
     }
@@ -90,7 +81,6 @@ export function UpdateLoginFlowWithWebAuthnMethodToJSON(value?: UpdateLoginFlowW
         'identifier': value['identifier'],
         'method': value['method'],
         'transient_payload': value['transient_payload'],
-        'webauthn_login': value['webauthn_login'],
     };
 }
 

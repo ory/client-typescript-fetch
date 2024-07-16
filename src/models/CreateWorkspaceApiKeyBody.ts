@@ -16,34 +16,32 @@ import { mapValues } from '../runtime';
 /**
  * 
  * @export
- * @interface CreateProjectApiKeyRequest
+ * @interface CreateWorkspaceApiKeyBody
  */
-export interface CreateProjectApiKeyRequest {
+export interface CreateWorkspaceApiKeyBody {
     /**
-     * The Token Name
+     * The API Key Name
      * 
-     * A descriptive name for the token.
-     * 
-     * in: body
+     * A descriptive name for the API key.
      * @type {string}
-     * @memberof CreateProjectApiKeyRequest
+     * @memberof CreateWorkspaceApiKeyBody
      */
     name: string;
 }
 
 /**
- * Check if a given object implements the CreateProjectApiKeyRequest interface.
+ * Check if a given object implements the CreateWorkspaceApiKeyBody interface.
  */
-export function instanceOfCreateProjectApiKeyRequest(value: object): value is CreateProjectApiKeyRequest {
+export function instanceOfCreateWorkspaceApiKeyBody(value: object): value is CreateWorkspaceApiKeyBody {
     if (!('name' in value) || value['name'] === undefined) return false;
     return true;
 }
 
-export function CreateProjectApiKeyRequestFromJSON(json: any): CreateProjectApiKeyRequest {
-    return CreateProjectApiKeyRequestFromJSONTyped(json, false);
+export function CreateWorkspaceApiKeyBodyFromJSON(json: any): CreateWorkspaceApiKeyBody {
+    return CreateWorkspaceApiKeyBodyFromJSONTyped(json, false);
 }
 
-export function CreateProjectApiKeyRequestFromJSONTyped(json: any, ignoreDiscriminator: boolean): CreateProjectApiKeyRequest {
+export function CreateWorkspaceApiKeyBodyFromJSONTyped(json: any, ignoreDiscriminator: boolean): CreateWorkspaceApiKeyBody {
     if (json == null) {
         return json;
     }
@@ -53,7 +51,7 @@ export function CreateProjectApiKeyRequestFromJSONTyped(json: any, ignoreDiscrim
     };
 }
 
-export function CreateProjectApiKeyRequestToJSON(value?: CreateProjectApiKeyRequest | null): any {
+export function CreateWorkspaceApiKeyBodyToJSON(value?: CreateWorkspaceApiKeyBody | null): any {
     if (value == null) {
         return value;
     }
