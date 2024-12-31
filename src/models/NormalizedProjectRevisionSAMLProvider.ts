@@ -16,98 +16,147 @@ import { mapValues } from '../runtime';
 /**
  * 
  * @export
- * @interface NormalizedProjectRevisionTokenizerTemplate
+ * @interface NormalizedProjectRevisionSAMLProvider
  */
-export interface NormalizedProjectRevisionTokenizerTemplate {
+export interface NormalizedProjectRevisionSAMLProvider {
     /**
-     * Claims mapper URL
+     * ClientID is the application's Client ID.
      * @type {string}
-     * @memberof NormalizedProjectRevisionTokenizerTemplate
+     * @memberof NormalizedProjectRevisionSAMLProvider
      */
-    claims_mapper_url?: string;
+    client_id?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof NormalizedProjectRevisionSAMLProvider
+     */
+    client_secret?: string | null;
     /**
      * The Project's Revision Creation Date
      * @type {Date}
-     * @memberof NormalizedProjectRevisionTokenizerTemplate
+     * @memberof NormalizedProjectRevisionSAMLProvider
      */
     readonly created_at?: Date;
     /**
-     * The revision ID.
+     * 
      * @type {string}
-     * @memberof NormalizedProjectRevisionTokenizerTemplate
+     * @memberof NormalizedProjectRevisionSAMLProvider
      */
-    readonly id?: string;
+    id?: string;
     /**
-     * JSON Web Key URL
+     * Label represents an optional label which can be used in the UI generation.
      * @type {string}
-     * @memberof NormalizedProjectRevisionTokenizerTemplate
+     * @memberof NormalizedProjectRevisionSAMLProvider
      */
-    jwks_url?: string;
+    label?: string;
     /**
-     * The unique key of the template
+     * Mapper specifies the JSONNet code snippet which uses the OpenID Connect Provider's data (e.g. GitHub or Google
+     * profile information) to hydrate the identity's data.
      * @type {string}
-     * @memberof NormalizedProjectRevisionTokenizerTemplate
+     * @memberof NormalizedProjectRevisionSAMLProvider
      */
-    key?: string;
+    mapper_url?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof NormalizedProjectRevisionSAMLProvider
+     */
+    organization_id?: string | null;
     /**
      * The Revision's ID this schema belongs to
      * @type {string}
-     * @memberof NormalizedProjectRevisionTokenizerTemplate
+     * @memberof NormalizedProjectRevisionSAMLProvider
      */
     project_revision_id?: string;
     /**
-     * Token time to live
+     * ID is the provider's ID
      * @type {string}
-     * @memberof NormalizedProjectRevisionTokenizerTemplate
+     * @memberof NormalizedProjectRevisionSAMLProvider
      */
-    ttl?: string;
+    provider_id?: string;
+    /**
+     * RawIDPMetadataXML is the raw XML metadata of the IDP.
+     * @type {string}
+     * @memberof NormalizedProjectRevisionSAMLProvider
+     */
+    raw_idp_metadata_xml?: string;
+    /**
+     * State indicates the state of the provider
+     * 
+     * Only providers with state `enabled` will be used for authentication
+     * enabled ThirdPartyProviderStateEnabled
+     * disabled ThirdPartyProviderStateDisabled
+     * @type {string}
+     * @memberof NormalizedProjectRevisionSAMLProvider
+     */
+    state?: NormalizedProjectRevisionSAMLProviderStateEnum;
     /**
      * Last Time Project's Revision was Updated
      * @type {Date}
-     * @memberof NormalizedProjectRevisionTokenizerTemplate
+     * @memberof NormalizedProjectRevisionSAMLProvider
      */
     readonly updated_at?: Date;
 }
 
+
 /**
- * Check if a given object implements the NormalizedProjectRevisionTokenizerTemplate interface.
+ * @export
  */
-export function instanceOfNormalizedProjectRevisionTokenizerTemplate(value: object): value is NormalizedProjectRevisionTokenizerTemplate {
+export const NormalizedProjectRevisionSAMLProviderStateEnum = {
+    Enabled: 'enabled',
+    Disabled: 'disabled'
+} as const;
+export type NormalizedProjectRevisionSAMLProviderStateEnum = typeof NormalizedProjectRevisionSAMLProviderStateEnum[keyof typeof NormalizedProjectRevisionSAMLProviderStateEnum];
+
+
+/**
+ * Check if a given object implements the NormalizedProjectRevisionSAMLProvider interface.
+ */
+export function instanceOfNormalizedProjectRevisionSAMLProvider(value: object): value is NormalizedProjectRevisionSAMLProvider {
     return true;
 }
 
-export function NormalizedProjectRevisionTokenizerTemplateFromJSON(json: any): NormalizedProjectRevisionTokenizerTemplate {
-    return NormalizedProjectRevisionTokenizerTemplateFromJSONTyped(json, false);
+export function NormalizedProjectRevisionSAMLProviderFromJSON(json: any): NormalizedProjectRevisionSAMLProvider {
+    return NormalizedProjectRevisionSAMLProviderFromJSONTyped(json, false);
 }
 
-export function NormalizedProjectRevisionTokenizerTemplateFromJSONTyped(json: any, ignoreDiscriminator: boolean): NormalizedProjectRevisionTokenizerTemplate {
+export function NormalizedProjectRevisionSAMLProviderFromJSONTyped(json: any, ignoreDiscriminator: boolean): NormalizedProjectRevisionSAMLProvider {
     if (json == null) {
         return json;
     }
     return {
         
-        'claims_mapper_url': json['claims_mapper_url'] == null ? undefined : json['claims_mapper_url'],
+        'client_id': json['client_id'] == null ? undefined : json['client_id'],
+        'client_secret': json['client_secret'] == null ? undefined : json['client_secret'],
         'created_at': json['created_at'] == null ? undefined : (new Date(json['created_at'])),
         'id': json['id'] == null ? undefined : json['id'],
-        'jwks_url': json['jwks_url'] == null ? undefined : json['jwks_url'],
-        'key': json['key'] == null ? undefined : json['key'],
+        'label': json['label'] == null ? undefined : json['label'],
+        'mapper_url': json['mapper_url'] == null ? undefined : json['mapper_url'],
+        'organization_id': json['organization_id'] == null ? undefined : json['organization_id'],
         'project_revision_id': json['project_revision_id'] == null ? undefined : json['project_revision_id'],
-        'ttl': json['ttl'] == null ? undefined : json['ttl'],
+        'provider_id': json['provider_id'] == null ? undefined : json['provider_id'],
+        'raw_idp_metadata_xml': json['raw_idp_metadata_xml'] == null ? undefined : json['raw_idp_metadata_xml'],
+        'state': json['state'] == null ? undefined : json['state'],
         'updated_at': json['updated_at'] == null ? undefined : (new Date(json['updated_at'])),
     };
 }
 
-export function NormalizedProjectRevisionTokenizerTemplateToJSON(value?: Omit<NormalizedProjectRevisionTokenizerTemplate, 'created_at'|'id'|'updated_at'> | null): any {
+export function NormalizedProjectRevisionSAMLProviderToJSON(value?: Omit<NormalizedProjectRevisionSAMLProvider, 'created_at'|'updated_at'> | null): any {
     if (value == null) {
         return value;
     }
     return {
         
-        'claims_mapper_url': value['claims_mapper_url'],
-        'jwks_url': value['jwks_url'],
-        'key': value['key'],
+        'client_id': value['client_id'],
+        'client_secret': value['client_secret'],
+        'id': value['id'],
+        'label': value['label'],
+        'mapper_url': value['mapper_url'],
+        'organization_id': value['organization_id'],
         'project_revision_id': value['project_revision_id'],
-        'ttl': value['ttl'],
+        'provider_id': value['provider_id'],
+        'raw_idp_metadata_xml': value['raw_idp_metadata_xml'],
+        'state': value['state'],
     };
 }
 
