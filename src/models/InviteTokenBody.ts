@@ -14,89 +14,52 @@
 
 import { mapValues } from '../runtime';
 /**
- * 
+ * Invite Token Body
  * @export
- * @interface UiText
+ * @interface InviteTokenBody
  */
-export interface UiText {
+export interface InviteTokenBody {
     /**
-     * The message's context. Useful when customizing messages.
-     * @type {object}
-     * @memberof UiText
-     */
-    context?: object;
-    /**
+     * Invite Token
      * 
-     * @type {number}
-     * @memberof UiText
-     */
-    id: number;
-    /**
-     * The message text. Written in american english.
+     * The Invite Token.
+     * 
+     * format: uuid
      * @type {string}
-     * @memberof UiText
+     * @memberof InviteTokenBody
      */
-    text: string;
-    /**
-     * The message type.
-     * info Info
-     * error Error
-     * success Success
-     * @type {string}
-     * @memberof UiText
-     */
-    type: UiTextTypeEnum;
+    invite_token: string;
 }
 
-
 /**
- * @export
+ * Check if a given object implements the InviteTokenBody interface.
  */
-export const UiTextTypeEnum = {
-    Info: 'info',
-    Error: 'error',
-    Success: 'success'
-} as const;
-export type UiTextTypeEnum = typeof UiTextTypeEnum[keyof typeof UiTextTypeEnum];
-
-
-/**
- * Check if a given object implements the UiText interface.
- */
-export function instanceOfUiText(value: object): value is UiText {
-    if (!('id' in value) || value['id'] === undefined) return false;
-    if (!('text' in value) || value['text'] === undefined) return false;
-    if (!('type' in value) || value['type'] === undefined) return false;
+export function instanceOfInviteTokenBody(value: object): value is InviteTokenBody {
+    if (!('invite_token' in value) || value['invite_token'] === undefined) return false;
     return true;
 }
 
-export function UiTextFromJSON(json: any): UiText {
-    return UiTextFromJSONTyped(json, false);
+export function InviteTokenBodyFromJSON(json: any): InviteTokenBody {
+    return InviteTokenBodyFromJSONTyped(json, false);
 }
 
-export function UiTextFromJSONTyped(json: any, ignoreDiscriminator: boolean): UiText {
+export function InviteTokenBodyFromJSONTyped(json: any, ignoreDiscriminator: boolean): InviteTokenBody {
     if (json == null) {
         return json;
     }
     return {
         
-        'context': json['context'] == null ? undefined : json['context'],
-        'id': json['id'],
-        'text': json['text'],
-        'type': json['type'],
+        'invite_token': json['invite_token'],
     };
 }
 
-export function UiTextToJSON(value?: UiText | null): any {
+export function InviteTokenBodyToJSON(value?: InviteTokenBody | null): any {
     if (value == null) {
         return value;
     }
     return {
         
-        'context': value['context'],
-        'id': value['id'],
-        'text': value['text'],
-        'type': value['type'],
+        'invite_token': value['invite_token'],
     };
 }
 
