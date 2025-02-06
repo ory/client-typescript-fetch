@@ -14,83 +14,109 @@
 
 import { mapValues } from '../runtime';
 /**
- * Update Login Flow with WebAuthn Method
+ * 
  * @export
- * @interface UpdateLoginFlowWithWebAuthnMethod
+ * @interface Provider
  */
-export interface UpdateLoginFlowWithWebAuthnMethod {
+export interface Provider {
     /**
-     * Sending the anti-csrf token is only required for browser login flows.
+     * The RP's client identifier, issued by the IdP.
      * @type {string}
-     * @memberof UpdateLoginFlowWithWebAuthnMethod
+     * @memberof Provider
      */
-    csrf_token?: string;
+    client_id?: string;
     /**
-     * Identifier is the email or username of the user trying to log in.
+     * A full path of the IdP config file.
      * @type {string}
-     * @memberof UpdateLoginFlowWithWebAuthnMethod
+     * @memberof Provider
      */
-    identifier: string;
+    config_url?: string;
     /**
-     * Method should be set to "webAuthn" when logging in using the WebAuthn strategy.
+     * By specifying one of domain_hints values provided by the accounts endpoints,
+     * the FedCM dialog selectively shows the specified account.
      * @type {string}
-     * @memberof UpdateLoginFlowWithWebAuthnMethod
+     * @memberof Provider
      */
-    method: string;
+    domain_hint?: string;
     /**
-     * Transient data to pass along to any webhooks
-     * @type {object}
-     * @memberof UpdateLoginFlowWithWebAuthnMethod
-     */
-    transient_payload?: object;
-    /**
-     * Login a WebAuthn Security Key
+     * Array of strings that specifies the user information ("name", " email",
+     * "picture") that RP needs IdP to share with them.
      * 
-     * This must contain the ID of the WebAuthN connection.
-     * @type {string}
-     * @memberof UpdateLoginFlowWithWebAuthnMethod
+     * Note: Field API is supported by Chrome 132 and later.
+     * @type {Array<string>}
+     * @memberof Provider
      */
-    webauthn_login?: string;
+    fields?: Array<string>;
+    /**
+     * By specifying one of login_hints values provided by the accounts endpoints,
+     * the FedCM dialog selectively shows the specified account.
+     * @type {string}
+     * @memberof Provider
+     */
+    login_hint?: string;
+    /**
+     * A random string to ensure the response is issued for this specific request.
+     * Prevents replay attacks.
+     * @type {string}
+     * @memberof Provider
+     */
+    nonce?: string;
+    /**
+     * Custom object that allows to specify additional key-value parameters:
+     * scope: A string value containing additional permissions that RP needs to
+     * request, for example " drive.readonly calendar.readonly"
+     * nonce: A random string to ensure the response is issued for this specific
+     * request. Prevents replay attacks.
+     * 
+     * Other custom key-value parameters.
+     * 
+     * Note: parameters is supported from Chrome 132.
+     * @type {{ [key: string]: string; }}
+     * @memberof Provider
+     */
+    parameters?: { [key: string]: string; };
 }
 
 /**
- * Check if a given object implements the UpdateLoginFlowWithWebAuthnMethod interface.
+ * Check if a given object implements the Provider interface.
  */
-export function instanceOfUpdateLoginFlowWithWebAuthnMethod(value: object): value is UpdateLoginFlowWithWebAuthnMethod {
-    if (!('identifier' in value) || value['identifier'] === undefined) return false;
-    if (!('method' in value) || value['method'] === undefined) return false;
+export function instanceOfProvider(value: object): value is Provider {
     return true;
 }
 
-export function UpdateLoginFlowWithWebAuthnMethodFromJSON(json: any): UpdateLoginFlowWithWebAuthnMethod {
-    return UpdateLoginFlowWithWebAuthnMethodFromJSONTyped(json, false);
+export function ProviderFromJSON(json: any): Provider {
+    return ProviderFromJSONTyped(json, false);
 }
 
-export function UpdateLoginFlowWithWebAuthnMethodFromJSONTyped(json: any, ignoreDiscriminator: boolean): UpdateLoginFlowWithWebAuthnMethod {
+export function ProviderFromJSONTyped(json: any, ignoreDiscriminator: boolean): Provider {
     if (json == null) {
         return json;
     }
     return {
         
-        'csrf_token': json['csrf_token'] == null ? undefined : json['csrf_token'],
-        'identifier': json['identifier'],
-        'method': json['method'],
-        'transient_payload': json['transient_payload'] == null ? undefined : json['transient_payload'],
-        'webauthn_login': json['webauthn_login'] == null ? undefined : json['webauthn_login'],
+        'client_id': json['client_id'] == null ? undefined : json['client_id'],
+        'config_url': json['config_url'] == null ? undefined : json['config_url'],
+        'domain_hint': json['domain_hint'] == null ? undefined : json['domain_hint'],
+        'fields': json['fields'] == null ? undefined : json['fields'],
+        'login_hint': json['login_hint'] == null ? undefined : json['login_hint'],
+        'nonce': json['nonce'] == null ? undefined : json['nonce'],
+        'parameters': json['parameters'] == null ? undefined : json['parameters'],
     };
 }
 
-export function UpdateLoginFlowWithWebAuthnMethodToJSON(value?: UpdateLoginFlowWithWebAuthnMethod | null): any {
+export function ProviderToJSON(value?: Provider | null): any {
     if (value == null) {
         return value;
     }
     return {
         
-        'csrf_token': value['csrf_token'],
-        'identifier': value['identifier'],
-        'method': value['method'],
-        'transient_payload': value['transient_payload'],
-        'webauthn_login': value['webauthn_login'],
+        'client_id': value['client_id'],
+        'config_url': value['config_url'],
+        'domain_hint': value['domain_hint'],
+        'fields': value['fields'],
+        'login_hint': value['login_hint'],
+        'nonce': value['nonce'],
+        'parameters': value['parameters'],
     };
 }
 

@@ -13,84 +13,63 @@
  */
 
 import { mapValues } from '../runtime';
+import type { Provider } from './Provider';
+import {
+    ProviderFromJSON,
+    ProviderFromJSONTyped,
+    ProviderToJSON,
+} from './Provider';
+
 /**
- * Update Login Flow with WebAuthn Method
+ * Contains a list of all available FedCM providers.
  * @export
- * @interface UpdateLoginFlowWithWebAuthnMethod
+ * @interface CreateFedcmFlowResponse
  */
-export interface UpdateLoginFlowWithWebAuthnMethod {
+export interface CreateFedcmFlowResponse {
     /**
-     * Sending the anti-csrf token is only required for browser login flows.
+     * 
      * @type {string}
-     * @memberof UpdateLoginFlowWithWebAuthnMethod
+     * @memberof CreateFedcmFlowResponse
      */
     csrf_token?: string;
     /**
-     * Identifier is the email or username of the user trying to log in.
-     * @type {string}
-     * @memberof UpdateLoginFlowWithWebAuthnMethod
-     */
-    identifier: string;
-    /**
-     * Method should be set to "webAuthn" when logging in using the WebAuthn strategy.
-     * @type {string}
-     * @memberof UpdateLoginFlowWithWebAuthnMethod
-     */
-    method: string;
-    /**
-     * Transient data to pass along to any webhooks
-     * @type {object}
-     * @memberof UpdateLoginFlowWithWebAuthnMethod
-     */
-    transient_payload?: object;
-    /**
-     * Login a WebAuthn Security Key
      * 
-     * This must contain the ID of the WebAuthN connection.
-     * @type {string}
-     * @memberof UpdateLoginFlowWithWebAuthnMethod
+     * @type {Array<Provider>}
+     * @memberof CreateFedcmFlowResponse
      */
-    webauthn_login?: string;
+    providers?: Array<Provider>;
 }
 
 /**
- * Check if a given object implements the UpdateLoginFlowWithWebAuthnMethod interface.
+ * Check if a given object implements the CreateFedcmFlowResponse interface.
  */
-export function instanceOfUpdateLoginFlowWithWebAuthnMethod(value: object): value is UpdateLoginFlowWithWebAuthnMethod {
-    if (!('identifier' in value) || value['identifier'] === undefined) return false;
-    if (!('method' in value) || value['method'] === undefined) return false;
+export function instanceOfCreateFedcmFlowResponse(value: object): value is CreateFedcmFlowResponse {
     return true;
 }
 
-export function UpdateLoginFlowWithWebAuthnMethodFromJSON(json: any): UpdateLoginFlowWithWebAuthnMethod {
-    return UpdateLoginFlowWithWebAuthnMethodFromJSONTyped(json, false);
+export function CreateFedcmFlowResponseFromJSON(json: any): CreateFedcmFlowResponse {
+    return CreateFedcmFlowResponseFromJSONTyped(json, false);
 }
 
-export function UpdateLoginFlowWithWebAuthnMethodFromJSONTyped(json: any, ignoreDiscriminator: boolean): UpdateLoginFlowWithWebAuthnMethod {
+export function CreateFedcmFlowResponseFromJSONTyped(json: any, ignoreDiscriminator: boolean): CreateFedcmFlowResponse {
     if (json == null) {
         return json;
     }
     return {
         
         'csrf_token': json['csrf_token'] == null ? undefined : json['csrf_token'],
-        'identifier': json['identifier'],
-        'method': json['method'],
-        'transient_payload': json['transient_payload'] == null ? undefined : json['transient_payload'],
-        'webauthn_login': json['webauthn_login'] == null ? undefined : json['webauthn_login'],
+        'providers': json['providers'] == null ? undefined : ((json['providers'] as Array<any>).map(ProviderFromJSON)),
     };
 }
 
-export function UpdateLoginFlowWithWebAuthnMethodToJSON(value?: UpdateLoginFlowWithWebAuthnMethod | null): any {
+export function CreateFedcmFlowResponseToJSON(value?: CreateFedcmFlowResponse | null): any {
     if (value == null) {
         return value;
     }
     return {
         
         'csrf_token': value['csrf_token'],
-        'identifier': value['identifier'],
-        'method': value['method'],
-        'transient_payload': value['transient_payload'],
-        'webauthn_login': value['webauthn_login'],
+        'providers': value['providers'] == null ? undefined : ((value['providers'] as Array<any>).map(ProviderToJSON)),
     };
 }
 

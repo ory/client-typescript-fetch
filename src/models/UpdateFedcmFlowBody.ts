@@ -14,83 +14,66 @@
 
 import { mapValues } from '../runtime';
 /**
- * Update Login Flow with WebAuthn Method
+ * 
  * @export
- * @interface UpdateLoginFlowWithWebAuthnMethod
+ * @interface UpdateFedcmFlowBody
  */
-export interface UpdateLoginFlowWithWebAuthnMethod {
+export interface UpdateFedcmFlowBody {
     /**
-     * Sending the anti-csrf token is only required for browser login flows.
+     * CSRFToken is the anti-CSRF token.
      * @type {string}
-     * @memberof UpdateLoginFlowWithWebAuthnMethod
+     * @memberof UpdateFedcmFlowBody
      */
-    csrf_token?: string;
+    csrf_token: string;
     /**
-     * Identifier is the email or username of the user trying to log in.
+     * Nonce is the nonce that was used in the `navigator.credentials.get` call. If
+     * specified, it must match the `nonce` claim in the token.
      * @type {string}
-     * @memberof UpdateLoginFlowWithWebAuthnMethod
+     * @memberof UpdateFedcmFlowBody
      */
-    identifier: string;
+    nonce?: string;
     /**
-     * Method should be set to "webAuthn" when logging in using the WebAuthn strategy.
+     * Token contains the result of `navigator.credentials.get`.
      * @type {string}
-     * @memberof UpdateLoginFlowWithWebAuthnMethod
+     * @memberof UpdateFedcmFlowBody
      */
-    method: string;
-    /**
-     * Transient data to pass along to any webhooks
-     * @type {object}
-     * @memberof UpdateLoginFlowWithWebAuthnMethod
-     */
-    transient_payload?: object;
-    /**
-     * Login a WebAuthn Security Key
-     * 
-     * This must contain the ID of the WebAuthN connection.
-     * @type {string}
-     * @memberof UpdateLoginFlowWithWebAuthnMethod
-     */
-    webauthn_login?: string;
+    token: string;
 }
 
 /**
- * Check if a given object implements the UpdateLoginFlowWithWebAuthnMethod interface.
+ * Check if a given object implements the UpdateFedcmFlowBody interface.
  */
-export function instanceOfUpdateLoginFlowWithWebAuthnMethod(value: object): value is UpdateLoginFlowWithWebAuthnMethod {
-    if (!('identifier' in value) || value['identifier'] === undefined) return false;
-    if (!('method' in value) || value['method'] === undefined) return false;
+export function instanceOfUpdateFedcmFlowBody(value: object): value is UpdateFedcmFlowBody {
+    if (!('csrf_token' in value) || value['csrf_token'] === undefined) return false;
+    if (!('token' in value) || value['token'] === undefined) return false;
     return true;
 }
 
-export function UpdateLoginFlowWithWebAuthnMethodFromJSON(json: any): UpdateLoginFlowWithWebAuthnMethod {
-    return UpdateLoginFlowWithWebAuthnMethodFromJSONTyped(json, false);
+export function UpdateFedcmFlowBodyFromJSON(json: any): UpdateFedcmFlowBody {
+    return UpdateFedcmFlowBodyFromJSONTyped(json, false);
 }
 
-export function UpdateLoginFlowWithWebAuthnMethodFromJSONTyped(json: any, ignoreDiscriminator: boolean): UpdateLoginFlowWithWebAuthnMethod {
+export function UpdateFedcmFlowBodyFromJSONTyped(json: any, ignoreDiscriminator: boolean): UpdateFedcmFlowBody {
     if (json == null) {
         return json;
     }
     return {
         
-        'csrf_token': json['csrf_token'] == null ? undefined : json['csrf_token'],
-        'identifier': json['identifier'],
-        'method': json['method'],
-        'transient_payload': json['transient_payload'] == null ? undefined : json['transient_payload'],
-        'webauthn_login': json['webauthn_login'] == null ? undefined : json['webauthn_login'],
+        'csrf_token': json['csrf_token'],
+        'nonce': json['nonce'] == null ? undefined : json['nonce'],
+        'token': json['token'],
     };
 }
 
-export function UpdateLoginFlowWithWebAuthnMethodToJSON(value?: UpdateLoginFlowWithWebAuthnMethod | null): any {
+export function UpdateFedcmFlowBodyToJSON(value?: UpdateFedcmFlowBody | null): any {
     if (value == null) {
         return value;
     }
     return {
         
         'csrf_token': value['csrf_token'],
-        'identifier': value['identifier'],
-        'method': value['method'],
-        'transient_payload': value['transient_payload'],
-        'webauthn_login': value['webauthn_login'],
+        'nonce': value['nonce'],
+        'token': value['token'],
     };
 }
 
