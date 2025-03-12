@@ -13,61 +13,104 @@
  */
 
 import { mapValues } from '../runtime';
-import type { IdentityCredentialsCodeAddress } from './IdentityCredentialsCodeAddress';
-import {
-    IdentityCredentialsCodeAddressFromJSON,
-    IdentityCredentialsCodeAddressFromJSONTyped,
-    IdentityCredentialsCodeAddressToJSON,
-    IdentityCredentialsCodeAddressToJSONTyped,
-} from './IdentityCredentialsCodeAddress';
-
 /**
- * CredentialsCode represents a one time login/registration code
+ * Division sections are used for interactive widgets that require a hook in the DOM / view.
  * @export
- * @interface IdentityCredentialsCode
+ * @interface UiNodeDivisionAttributes
  */
-export interface IdentityCredentialsCode {
+export interface UiNodeDivisionAttributes {
     /**
-     * 
-     * @type {Array<IdentityCredentialsCodeAddress>}
-     * @memberof IdentityCredentialsCode
+     * The script MIME type
+     * @type {string}
+     * @memberof UiNodeDivisionAttributes
      */
-    addresses?: Array<IdentityCredentialsCodeAddress>;
+    _class?: string;
+    /**
+     * Data is a map of key-value pairs that are passed to the division.
+     * 
+     * They may be used for `data-...` attributes.
+     * @type {{ [key: string]: string; }}
+     * @memberof UiNodeDivisionAttributes
+     */
+    data?: { [key: string]: string; };
+    /**
+     * A unique identifier
+     * @type {string}
+     * @memberof UiNodeDivisionAttributes
+     */
+    id: string;
+    /**
+     * NodeType represents this node's types. It is a mirror of `node.type` and
+     * is primarily used to allow compatibility with OpenAPI 3.0. In this struct it technically always is "script".
+     * text Text
+     * input Input
+     * img Image
+     * a Anchor
+     * script Script
+     * div Division
+     * @type {string}
+     * @memberof UiNodeDivisionAttributes
+     */
+    node_type: UiNodeDivisionAttributesNodeTypeEnum;
 }
 
+
 /**
- * Check if a given object implements the IdentityCredentialsCode interface.
+ * @export
  */
-export function instanceOfIdentityCredentialsCode(value: object): value is IdentityCredentialsCode {
+export const UiNodeDivisionAttributesNodeTypeEnum = {
+    Text: 'text',
+    Input: 'input',
+    Img: 'img',
+    A: 'a',
+    Script: 'script',
+    Div: 'div',
+    UnknownDefaultOpenApi: '11184809'
+} as const;
+export type UiNodeDivisionAttributesNodeTypeEnum = typeof UiNodeDivisionAttributesNodeTypeEnum[keyof typeof UiNodeDivisionAttributesNodeTypeEnum];
+
+
+/**
+ * Check if a given object implements the UiNodeDivisionAttributes interface.
+ */
+export function instanceOfUiNodeDivisionAttributes(value: object): value is UiNodeDivisionAttributes {
+    if (!('id' in value) || value['id'] === undefined) return false;
+    if (!('node_type' in value) || value['node_type'] === undefined) return false;
     return true;
 }
 
-export function IdentityCredentialsCodeFromJSON(json: any): IdentityCredentialsCode {
-    return IdentityCredentialsCodeFromJSONTyped(json, false);
+export function UiNodeDivisionAttributesFromJSON(json: any): UiNodeDivisionAttributes {
+    return UiNodeDivisionAttributesFromJSONTyped(json, false);
 }
 
-export function IdentityCredentialsCodeFromJSONTyped(json: any, ignoreDiscriminator: boolean): IdentityCredentialsCode {
+export function UiNodeDivisionAttributesFromJSONTyped(json: any, ignoreDiscriminator: boolean): UiNodeDivisionAttributes {
     if (json == null) {
         return json;
     }
     return {
         
-        'addresses': json['addresses'] == null ? undefined : ((json['addresses'] as Array<any>).map(IdentityCredentialsCodeAddressFromJSON)),
+        '_class': json['class'] == null ? undefined : json['class'],
+        'data': json['data'] == null ? undefined : json['data'],
+        'id': json['id'],
+        'node_type': json['node_type'],
     };
 }
 
-export function IdentityCredentialsCodeToJSON(json: any): IdentityCredentialsCode {
-    return IdentityCredentialsCodeToJSONTyped(json, false);
+export function UiNodeDivisionAttributesToJSON(json: any): UiNodeDivisionAttributes {
+    return UiNodeDivisionAttributesToJSONTyped(json, false);
 }
 
-export function IdentityCredentialsCodeToJSONTyped(value?: IdentityCredentialsCode | null, ignoreDiscriminator: boolean = false): any {
+export function UiNodeDivisionAttributesToJSONTyped(value?: UiNodeDivisionAttributes | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
 
     return {
         
-        'addresses': value['addresses'] == null ? undefined : ((value['addresses'] as Array<any>).map(IdentityCredentialsCodeAddressToJSON)),
+        'class': value['_class'],
+        'data': value['data'],
+        'id': value['id'],
+        'node_type': value['node_type'],
     };
 }
 
