@@ -14,53 +14,88 @@
 
 import { mapValues } from '../runtime';
 /**
- * The content of the allowed field is mirrored in the HTTP status code.
+ * Update login flow using SAML
  * @export
- * @interface CheckPermissionResult
+ * @interface UpdateLoginFlowWithSamlMethod
  */
-export interface CheckPermissionResult {
+export interface UpdateLoginFlowWithSamlMethod {
     /**
-     * whether the relation tuple is allowed
-     * @type {boolean}
-     * @memberof CheckPermissionResult
+     * The CSRF Token
+     * @type {string}
+     * @memberof UpdateLoginFlowWithSamlMethod
      */
-    allowed: boolean;
+    csrf_token?: string;
+    /**
+     * Method to use
+     * 
+     * This field must be set to `saml` when using the saml method.
+     * @type {string}
+     * @memberof UpdateLoginFlowWithSamlMethod
+     */
+    method: string;
+    /**
+     * The provider to register with
+     * @type {string}
+     * @memberof UpdateLoginFlowWithSamlMethod
+     */
+    provider: string;
+    /**
+     * The identity traits. This is a placeholder for the registration flow.
+     * @type {object}
+     * @memberof UpdateLoginFlowWithSamlMethod
+     */
+    traits?: object;
+    /**
+     * Transient data to pass along to any webhooks
+     * @type {object}
+     * @memberof UpdateLoginFlowWithSamlMethod
+     */
+    transient_payload?: object;
 }
 
 /**
- * Check if a given object implements the CheckPermissionResult interface.
+ * Check if a given object implements the UpdateLoginFlowWithSamlMethod interface.
  */
-export function instanceOfCheckPermissionResult(value: object): value is CheckPermissionResult {
-    if (!('allowed' in value) || value['allowed'] === undefined) return false;
+export function instanceOfUpdateLoginFlowWithSamlMethod(value: object): value is UpdateLoginFlowWithSamlMethod {
+    if (!('method' in value) || value['method'] === undefined) return false;
+    if (!('provider' in value) || value['provider'] === undefined) return false;
     return true;
 }
 
-export function CheckPermissionResultFromJSON(json: any): CheckPermissionResult {
-    return CheckPermissionResultFromJSONTyped(json, false);
+export function UpdateLoginFlowWithSamlMethodFromJSON(json: any): UpdateLoginFlowWithSamlMethod {
+    return UpdateLoginFlowWithSamlMethodFromJSONTyped(json, false);
 }
 
-export function CheckPermissionResultFromJSONTyped(json: any, ignoreDiscriminator: boolean): CheckPermissionResult {
+export function UpdateLoginFlowWithSamlMethodFromJSONTyped(json: any, ignoreDiscriminator: boolean): UpdateLoginFlowWithSamlMethod {
     if (json == null) {
         return json;
     }
     return {
         
-        'allowed': json['allowed'],
+        'csrf_token': json['csrf_token'] == null ? undefined : json['csrf_token'],
+        'method': json['method'],
+        'provider': json['provider'],
+        'traits': json['traits'] == null ? undefined : json['traits'],
+        'transient_payload': json['transient_payload'] == null ? undefined : json['transient_payload'],
     };
 }
 
-export function CheckPermissionResultToJSON(json: any): CheckPermissionResult {
-    return CheckPermissionResultToJSONTyped(json, false);
+export function UpdateLoginFlowWithSamlMethodToJSON(json: any): UpdateLoginFlowWithSamlMethod {
+    return UpdateLoginFlowWithSamlMethodToJSONTyped(json, false);
 }
 
-export function CheckPermissionResultToJSONTyped(value?: CheckPermissionResult | null, ignoreDiscriminator: boolean = false): any {
+export function UpdateLoginFlowWithSamlMethodToJSONTyped(value?: UpdateLoginFlowWithSamlMethod | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
 
     return {
         
-        'allowed': value['allowed'],
+        'csrf_token': value['csrf_token'],
+        'method': value['method'],
+        'provider': value['provider'],
+        'traits': value['traits'],
+        'transient_payload': value['transient_payload'],
     };
 }
 

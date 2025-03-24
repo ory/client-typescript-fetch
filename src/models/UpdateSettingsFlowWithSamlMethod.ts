@@ -14,53 +14,109 @@
 
 import { mapValues } from '../runtime';
 /**
- * The content of the allowed field is mirrored in the HTTP status code.
+ * Update settings flow using SAML
  * @export
- * @interface CheckPermissionResult
+ * @interface UpdateSettingsFlowWithSamlMethod
  */
-export interface CheckPermissionResult {
+export interface UpdateSettingsFlowWithSamlMethod {
     /**
-     * whether the relation tuple is allowed
-     * @type {boolean}
-     * @memberof CheckPermissionResult
+     * Flow ID is the flow's ID.
+     * 
+     * in: query
+     * @type {string}
+     * @memberof UpdateSettingsFlowWithSamlMethod
      */
-    allowed: boolean;
+    flow?: string;
+    /**
+     * Link this provider
+     * 
+     * Either this or `unlink` must be set.
+     * 
+     * type: string
+     * in: body
+     * @type {string}
+     * @memberof UpdateSettingsFlowWithSamlMethod
+     */
+    link?: string;
+    /**
+     * Method
+     * 
+     * Should be set to saml when trying to update a profile.
+     * @type {string}
+     * @memberof UpdateSettingsFlowWithSamlMethod
+     */
+    method: string;
+    /**
+     * The identity's traits
+     * 
+     * in: body
+     * @type {object}
+     * @memberof UpdateSettingsFlowWithSamlMethod
+     */
+    traits?: object;
+    /**
+     * Transient data to pass along to any webhooks
+     * @type {object}
+     * @memberof UpdateSettingsFlowWithSamlMethod
+     */
+    transient_payload?: object;
+    /**
+     * Unlink this provider
+     * 
+     * Either this or `link` must be set.
+     * 
+     * type: string
+     * in: body
+     * @type {string}
+     * @memberof UpdateSettingsFlowWithSamlMethod
+     */
+    unlink?: string;
 }
 
 /**
- * Check if a given object implements the CheckPermissionResult interface.
+ * Check if a given object implements the UpdateSettingsFlowWithSamlMethod interface.
  */
-export function instanceOfCheckPermissionResult(value: object): value is CheckPermissionResult {
-    if (!('allowed' in value) || value['allowed'] === undefined) return false;
+export function instanceOfUpdateSettingsFlowWithSamlMethod(value: object): value is UpdateSettingsFlowWithSamlMethod {
+    if (!('method' in value) || value['method'] === undefined) return false;
     return true;
 }
 
-export function CheckPermissionResultFromJSON(json: any): CheckPermissionResult {
-    return CheckPermissionResultFromJSONTyped(json, false);
+export function UpdateSettingsFlowWithSamlMethodFromJSON(json: any): UpdateSettingsFlowWithSamlMethod {
+    return UpdateSettingsFlowWithSamlMethodFromJSONTyped(json, false);
 }
 
-export function CheckPermissionResultFromJSONTyped(json: any, ignoreDiscriminator: boolean): CheckPermissionResult {
+export function UpdateSettingsFlowWithSamlMethodFromJSONTyped(json: any, ignoreDiscriminator: boolean): UpdateSettingsFlowWithSamlMethod {
     if (json == null) {
         return json;
     }
     return {
         
-        'allowed': json['allowed'],
+        'flow': json['flow'] == null ? undefined : json['flow'],
+        'link': json['link'] == null ? undefined : json['link'],
+        'method': json['method'],
+        'traits': json['traits'] == null ? undefined : json['traits'],
+        'transient_payload': json['transient_payload'] == null ? undefined : json['transient_payload'],
+        'unlink': json['unlink'] == null ? undefined : json['unlink'],
     };
 }
 
-export function CheckPermissionResultToJSON(json: any): CheckPermissionResult {
-    return CheckPermissionResultToJSONTyped(json, false);
+export function UpdateSettingsFlowWithSamlMethodToJSON(json: any): UpdateSettingsFlowWithSamlMethod {
+    return UpdateSettingsFlowWithSamlMethodToJSONTyped(json, false);
 }
 
-export function CheckPermissionResultToJSONTyped(value?: CheckPermissionResult | null, ignoreDiscriminator: boolean = false): any {
+export function UpdateSettingsFlowWithSamlMethodToJSONTyped(value?: UpdateSettingsFlowWithSamlMethod | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
 
     return {
         
-        'allowed': value['allowed'],
+        'flow': value['flow'],
+        'link': value['link'],
+        'method': value['method'],
+        'traits': value['traits'],
+        'transient_payload': value['transient_payload'],
+        'unlink': value['unlink'],
     };
 }
 
