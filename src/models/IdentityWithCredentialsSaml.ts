@@ -13,105 +13,61 @@
  */
 
 import { mapValues } from '../runtime';
+import type { IdentityWithCredentialsSamlConfig } from './IdentityWithCredentialsSamlConfig';
+import {
+    IdentityWithCredentialsSamlConfigFromJSON,
+    IdentityWithCredentialsSamlConfigFromJSONTyped,
+    IdentityWithCredentialsSamlConfigToJSON,
+    IdentityWithCredentialsSamlConfigToJSONTyped,
+} from './IdentityWithCredentialsSamlConfig';
+
 /**
- * 
+ * Payload to import SAML credentials
  * @export
- * @interface CreateWorkspaceSubscriptionBody
+ * @interface IdentityWithCredentialsSaml
  */
-export interface CreateWorkspaceSubscriptionBody {
+export interface IdentityWithCredentialsSaml {
     /**
      * 
-     * usd USD
-     * eur Euro
-     * @type {string}
-     * @memberof CreateWorkspaceSubscriptionBody
+     * @type {IdentityWithCredentialsSamlConfig}
+     * @memberof IdentityWithCredentialsSaml
      */
-    currency?: CreateWorkspaceSubscriptionBodyCurrencyEnum;
-    /**
-     * 
-     * monthly Monthly
-     * yearly Yearly
-     * @type {string}
-     * @memberof CreateWorkspaceSubscriptionBody
-     */
-    interval: CreateWorkspaceSubscriptionBodyIntervalEnum;
-    /**
-     * 
-     * @type {string}
-     * @memberof CreateWorkspaceSubscriptionBody
-     */
-    plan: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof CreateWorkspaceSubscriptionBody
-     */
-    return_to?: string;
+    config?: IdentityWithCredentialsSamlConfig;
 }
 
-
 /**
- * @export
+ * Check if a given object implements the IdentityWithCredentialsSaml interface.
  */
-export const CreateWorkspaceSubscriptionBodyCurrencyEnum = {
-    Usd: 'usd',
-    Eur: 'eur',
-    UnknownDefaultOpenApi: '11184809'
-} as const;
-export type CreateWorkspaceSubscriptionBodyCurrencyEnum = typeof CreateWorkspaceSubscriptionBodyCurrencyEnum[keyof typeof CreateWorkspaceSubscriptionBodyCurrencyEnum];
-
-/**
- * @export
- */
-export const CreateWorkspaceSubscriptionBodyIntervalEnum = {
-    Monthly: 'monthly',
-    Yearly: 'yearly',
-    UnknownDefaultOpenApi: '11184809'
-} as const;
-export type CreateWorkspaceSubscriptionBodyIntervalEnum = typeof CreateWorkspaceSubscriptionBodyIntervalEnum[keyof typeof CreateWorkspaceSubscriptionBodyIntervalEnum];
-
-
-/**
- * Check if a given object implements the CreateWorkspaceSubscriptionBody interface.
- */
-export function instanceOfCreateWorkspaceSubscriptionBody(value: object): value is CreateWorkspaceSubscriptionBody {
-    if (!('interval' in value) || value['interval'] === undefined) return false;
-    if (!('plan' in value) || value['plan'] === undefined) return false;
+export function instanceOfIdentityWithCredentialsSaml(value: object): value is IdentityWithCredentialsSaml {
     return true;
 }
 
-export function CreateWorkspaceSubscriptionBodyFromJSON(json: any): CreateWorkspaceSubscriptionBody {
-    return CreateWorkspaceSubscriptionBodyFromJSONTyped(json, false);
+export function IdentityWithCredentialsSamlFromJSON(json: any): IdentityWithCredentialsSaml {
+    return IdentityWithCredentialsSamlFromJSONTyped(json, false);
 }
 
-export function CreateWorkspaceSubscriptionBodyFromJSONTyped(json: any, ignoreDiscriminator: boolean): CreateWorkspaceSubscriptionBody {
+export function IdentityWithCredentialsSamlFromJSONTyped(json: any, ignoreDiscriminator: boolean): IdentityWithCredentialsSaml {
     if (json == null) {
         return json;
     }
     return {
         
-        'currency': json['currency'] == null ? undefined : json['currency'],
-        'interval': json['interval'],
-        'plan': json['plan'],
-        'return_to': json['return_to'] == null ? undefined : json['return_to'],
+        'config': json['config'] == null ? undefined : IdentityWithCredentialsSamlConfigFromJSON(json['config']),
     };
 }
 
-export function CreateWorkspaceSubscriptionBodyToJSON(json: any): CreateWorkspaceSubscriptionBody {
-    return CreateWorkspaceSubscriptionBodyToJSONTyped(json, false);
+export function IdentityWithCredentialsSamlToJSON(json: any): IdentityWithCredentialsSaml {
+    return IdentityWithCredentialsSamlToJSONTyped(json, false);
 }
 
-export function CreateWorkspaceSubscriptionBodyToJSONTyped(value?: CreateWorkspaceSubscriptionBody | null, ignoreDiscriminator: boolean = false): any {
+export function IdentityWithCredentialsSamlToJSONTyped(value?: IdentityWithCredentialsSaml | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
 
     return {
         
-        'currency': value['currency'],
-        'interval': value['interval'],
-        'plan': value['plan'],
-        'return_to': value['return_to'],
+        'config': IdentityWithCredentialsSamlConfigToJSON(value['config']),
     };
 }
 

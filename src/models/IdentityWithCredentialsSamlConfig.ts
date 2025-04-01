@@ -13,105 +13,61 @@
  */
 
 import { mapValues } from '../runtime';
+import type { IdentityWithCredentialsSamlConfigProvider } from './IdentityWithCredentialsSamlConfigProvider';
+import {
+    IdentityWithCredentialsSamlConfigProviderFromJSON,
+    IdentityWithCredentialsSamlConfigProviderFromJSONTyped,
+    IdentityWithCredentialsSamlConfigProviderToJSON,
+    IdentityWithCredentialsSamlConfigProviderToJSONTyped,
+} from './IdentityWithCredentialsSamlConfigProvider';
+
 /**
- * 
+ * Payload of SAML providers
  * @export
- * @interface CreateWorkspaceSubscriptionBody
+ * @interface IdentityWithCredentialsSamlConfig
  */
-export interface CreateWorkspaceSubscriptionBody {
+export interface IdentityWithCredentialsSamlConfig {
     /**
-     * 
-     * usd USD
-     * eur Euro
-     * @type {string}
-     * @memberof CreateWorkspaceSubscriptionBody
+     * A list of SAML Providers
+     * @type {Array<IdentityWithCredentialsSamlConfigProvider>}
+     * @memberof IdentityWithCredentialsSamlConfig
      */
-    currency?: CreateWorkspaceSubscriptionBodyCurrencyEnum;
-    /**
-     * 
-     * monthly Monthly
-     * yearly Yearly
-     * @type {string}
-     * @memberof CreateWorkspaceSubscriptionBody
-     */
-    interval: CreateWorkspaceSubscriptionBodyIntervalEnum;
-    /**
-     * 
-     * @type {string}
-     * @memberof CreateWorkspaceSubscriptionBody
-     */
-    plan: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof CreateWorkspaceSubscriptionBody
-     */
-    return_to?: string;
+    providers?: Array<IdentityWithCredentialsSamlConfigProvider>;
 }
 
-
 /**
- * @export
+ * Check if a given object implements the IdentityWithCredentialsSamlConfig interface.
  */
-export const CreateWorkspaceSubscriptionBodyCurrencyEnum = {
-    Usd: 'usd',
-    Eur: 'eur',
-    UnknownDefaultOpenApi: '11184809'
-} as const;
-export type CreateWorkspaceSubscriptionBodyCurrencyEnum = typeof CreateWorkspaceSubscriptionBodyCurrencyEnum[keyof typeof CreateWorkspaceSubscriptionBodyCurrencyEnum];
-
-/**
- * @export
- */
-export const CreateWorkspaceSubscriptionBodyIntervalEnum = {
-    Monthly: 'monthly',
-    Yearly: 'yearly',
-    UnknownDefaultOpenApi: '11184809'
-} as const;
-export type CreateWorkspaceSubscriptionBodyIntervalEnum = typeof CreateWorkspaceSubscriptionBodyIntervalEnum[keyof typeof CreateWorkspaceSubscriptionBodyIntervalEnum];
-
-
-/**
- * Check if a given object implements the CreateWorkspaceSubscriptionBody interface.
- */
-export function instanceOfCreateWorkspaceSubscriptionBody(value: object): value is CreateWorkspaceSubscriptionBody {
-    if (!('interval' in value) || value['interval'] === undefined) return false;
-    if (!('plan' in value) || value['plan'] === undefined) return false;
+export function instanceOfIdentityWithCredentialsSamlConfig(value: object): value is IdentityWithCredentialsSamlConfig {
     return true;
 }
 
-export function CreateWorkspaceSubscriptionBodyFromJSON(json: any): CreateWorkspaceSubscriptionBody {
-    return CreateWorkspaceSubscriptionBodyFromJSONTyped(json, false);
+export function IdentityWithCredentialsSamlConfigFromJSON(json: any): IdentityWithCredentialsSamlConfig {
+    return IdentityWithCredentialsSamlConfigFromJSONTyped(json, false);
 }
 
-export function CreateWorkspaceSubscriptionBodyFromJSONTyped(json: any, ignoreDiscriminator: boolean): CreateWorkspaceSubscriptionBody {
+export function IdentityWithCredentialsSamlConfigFromJSONTyped(json: any, ignoreDiscriminator: boolean): IdentityWithCredentialsSamlConfig {
     if (json == null) {
         return json;
     }
     return {
         
-        'currency': json['currency'] == null ? undefined : json['currency'],
-        'interval': json['interval'],
-        'plan': json['plan'],
-        'return_to': json['return_to'] == null ? undefined : json['return_to'],
+        'providers': json['providers'] == null ? undefined : ((json['providers'] as Array<any>).map(IdentityWithCredentialsSamlConfigProviderFromJSON)),
     };
 }
 
-export function CreateWorkspaceSubscriptionBodyToJSON(json: any): CreateWorkspaceSubscriptionBody {
-    return CreateWorkspaceSubscriptionBodyToJSONTyped(json, false);
+export function IdentityWithCredentialsSamlConfigToJSON(json: any): IdentityWithCredentialsSamlConfig {
+    return IdentityWithCredentialsSamlConfigToJSONTyped(json, false);
 }
 
-export function CreateWorkspaceSubscriptionBodyToJSONTyped(value?: CreateWorkspaceSubscriptionBody | null, ignoreDiscriminator: boolean = false): any {
+export function IdentityWithCredentialsSamlConfigToJSONTyped(value?: IdentityWithCredentialsSamlConfig | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
 
     return {
         
-        'currency': value['currency'],
-        'interval': value['interval'],
-        'plan': value['plan'],
-        'return_to': value['return_to'],
+        'providers': value['providers'] == null ? undefined : ((value['providers'] as Array<any>).map(IdentityWithCredentialsSamlConfigProviderToJSON)),
     };
 }
 
