@@ -14,74 +14,63 @@
 
 import { mapValues } from '../runtime';
 /**
- * 
+ * SCIMClient represents a SCIM client configuration to be used by an external
+ * identity provider.
  * @export
- * @interface NormalizedProjectRevisionSAMLProvider
+ * @interface NormalizedProjectRevisionScimClient
  */
-export interface NormalizedProjectRevisionSAMLProvider {
+export interface NormalizedProjectRevisionScimClient {
     /**
-     * The Project's Revision Creation Date
+     * The secret that the client uses in the authorization header to authenticate itself.
+     * @type {string}
+     * @memberof NormalizedProjectRevisionScimClient
+     */
+    authorization_header_secret: string;
+    /**
+     * The unique ID of the SCIM server.
+     * @type {string}
+     * @memberof NormalizedProjectRevisionScimClient
+     */
+    client_id: string;
+    /**
+     * The SCIM client's creation time
      * @type {Date}
-     * @memberof NormalizedProjectRevisionSAMLProvider
+     * @memberof NormalizedProjectRevisionScimClient
      */
     readonly created_at?: Date;
     /**
+     * The SCIM server's label
+     * @type {string}
+     * @memberof NormalizedProjectRevisionScimClient
+     */
+    label: string;
+    /**
+     * Mapper specifies the JSONNet code snippet which uses the SCIM provider's data
+     * to hydrate the identity's data.
+     * @type {string}
+     * @memberof NormalizedProjectRevisionScimClient
+     */
+    mapper_url: string;
+    /**
+     * OrganizationID is the organization ID for this SCIM server.
+     * @type {string}
+     * @memberof NormalizedProjectRevisionScimClient
+     */
+    organization_id: string;
+    /**
+     * State indicates the state of the SCIM server
      * 
-     * @type {string}
-     * @memberof NormalizedProjectRevisionSAMLProvider
-     */
-    id?: string;
-    /**
-     * Label represents an optional label which can be used in the UI generation.
-     * @type {string}
-     * @memberof NormalizedProjectRevisionSAMLProvider
-     */
-    label?: string;
-    /**
-     * Mapper specifies the JSONNet code snippet which uses the OpenID Connect Provider's data (e.g. GitHub or Google
-     * profile information) to hydrate the identity's data.
-     * @type {string}
-     * @memberof NormalizedProjectRevisionSAMLProvider
-     */
-    mapper_url?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof NormalizedProjectRevisionSAMLProvider
-     */
-    organization_id?: string | null;
-    /**
-     * The Revision's ID this schema belongs to
-     * @type {string}
-     * @memberof NormalizedProjectRevisionSAMLProvider
-     */
-    project_revision_id?: string;
-    /**
-     * ID is the provider's ID
-     * @type {string}
-     * @memberof NormalizedProjectRevisionSAMLProvider
-     */
-    provider_id?: string;
-    /**
-     * RawIDPMetadataXML is the raw XML metadata of the IDP.
-     * @type {string}
-     * @memberof NormalizedProjectRevisionSAMLProvider
-     */
-    raw_idp_metadata_xml?: string;
-    /**
-     * State indicates the state of the provider
-     * 
-     * Only providers with state `enabled` will be used for authentication
+     * Only servers with state `enabled` will be available for SCIM provisioning.
      * enabled ThirdPartyProviderStateEnabled
      * disabled ThirdPartyProviderStateDisabled
      * @type {string}
-     * @memberof NormalizedProjectRevisionSAMLProvider
+     * @memberof NormalizedProjectRevisionScimClient
      */
-    state?: NormalizedProjectRevisionSAMLProviderStateEnum;
+    state?: NormalizedProjectRevisionScimClientStateEnum;
     /**
-     * Last Time Project's Revision was Updated
+     * Last time the SCIM client was updated
      * @type {Date}
-     * @memberof NormalizedProjectRevisionSAMLProvider
+     * @memberof NormalizedProjectRevisionScimClient
      */
     readonly updated_at?: Date;
 }
@@ -90,62 +79,63 @@ export interface NormalizedProjectRevisionSAMLProvider {
 /**
  * @export
  */
-export const NormalizedProjectRevisionSAMLProviderStateEnum = {
+export const NormalizedProjectRevisionScimClientStateEnum = {
     Enabled: 'enabled',
     Disabled: 'disabled',
     UnknownDefaultOpenApi: '11184809'
 } as const;
-export type NormalizedProjectRevisionSAMLProviderStateEnum = typeof NormalizedProjectRevisionSAMLProviderStateEnum[keyof typeof NormalizedProjectRevisionSAMLProviderStateEnum];
+export type NormalizedProjectRevisionScimClientStateEnum = typeof NormalizedProjectRevisionScimClientStateEnum[keyof typeof NormalizedProjectRevisionScimClientStateEnum];
 
 
 /**
- * Check if a given object implements the NormalizedProjectRevisionSAMLProvider interface.
+ * Check if a given object implements the NormalizedProjectRevisionScimClient interface.
  */
-export function instanceOfNormalizedProjectRevisionSAMLProvider(value: object): value is NormalizedProjectRevisionSAMLProvider {
+export function instanceOfNormalizedProjectRevisionScimClient(value: object): value is NormalizedProjectRevisionScimClient {
+    if (!('authorization_header_secret' in value) || value['authorization_header_secret'] === undefined) return false;
+    if (!('client_id' in value) || value['client_id'] === undefined) return false;
+    if (!('label' in value) || value['label'] === undefined) return false;
+    if (!('mapper_url' in value) || value['mapper_url'] === undefined) return false;
+    if (!('organization_id' in value) || value['organization_id'] === undefined) return false;
     return true;
 }
 
-export function NormalizedProjectRevisionSAMLProviderFromJSON(json: any): NormalizedProjectRevisionSAMLProvider {
-    return NormalizedProjectRevisionSAMLProviderFromJSONTyped(json, false);
+export function NormalizedProjectRevisionScimClientFromJSON(json: any): NormalizedProjectRevisionScimClient {
+    return NormalizedProjectRevisionScimClientFromJSONTyped(json, false);
 }
 
-export function NormalizedProjectRevisionSAMLProviderFromJSONTyped(json: any, ignoreDiscriminator: boolean): NormalizedProjectRevisionSAMLProvider {
+export function NormalizedProjectRevisionScimClientFromJSONTyped(json: any, ignoreDiscriminator: boolean): NormalizedProjectRevisionScimClient {
     if (json == null) {
         return json;
     }
     return {
         
+        'authorization_header_secret': json['authorization_header_secret'],
+        'client_id': json['client_id'],
         'created_at': json['created_at'] == null ? undefined : (new Date(json['created_at'])),
-        'id': json['id'] == null ? undefined : json['id'],
-        'label': json['label'] == null ? undefined : json['label'],
-        'mapper_url': json['mapper_url'] == null ? undefined : json['mapper_url'],
-        'organization_id': json['organization_id'] == null ? undefined : json['organization_id'],
-        'project_revision_id': json['project_revision_id'] == null ? undefined : json['project_revision_id'],
-        'provider_id': json['provider_id'] == null ? undefined : json['provider_id'],
-        'raw_idp_metadata_xml': json['raw_idp_metadata_xml'] == null ? undefined : json['raw_idp_metadata_xml'],
+        'label': json['label'],
+        'mapper_url': json['mapper_url'],
+        'organization_id': json['organization_id'],
         'state': json['state'] == null ? undefined : json['state'],
         'updated_at': json['updated_at'] == null ? undefined : (new Date(json['updated_at'])),
     };
 }
 
-export function NormalizedProjectRevisionSAMLProviderToJSON(json: any): NormalizedProjectRevisionSAMLProvider {
-    return NormalizedProjectRevisionSAMLProviderToJSONTyped(json, false);
+export function NormalizedProjectRevisionScimClientToJSON(json: any): NormalizedProjectRevisionScimClient {
+    return NormalizedProjectRevisionScimClientToJSONTyped(json, false);
 }
 
-export function NormalizedProjectRevisionSAMLProviderToJSONTyped(value?: Omit<NormalizedProjectRevisionSAMLProvider, 'created_at'|'updated_at'> | null, ignoreDiscriminator: boolean = false): any {
+export function NormalizedProjectRevisionScimClientToJSONTyped(value?: Omit<NormalizedProjectRevisionScimClient, 'created_at'|'updated_at'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
 
     return {
         
-        'id': value['id'],
+        'authorization_header_secret': value['authorization_header_secret'],
+        'client_id': value['client_id'],
         'label': value['label'],
         'mapper_url': value['mapper_url'],
         'organization_id': value['organization_id'],
-        'project_revision_id': value['project_revision_id'],
-        'provider_id': value['provider_id'],
-        'raw_idp_metadata_xml': value['raw_idp_metadata_xml'],
         'state': value['state'],
     };
 }
