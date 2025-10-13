@@ -16,112 +16,60 @@ import { mapValues } from '../runtime';
 /**
  * 
  * @export
- * @interface Provider
+ * @interface RevisionAccountExperienceCustomTranslation
  */
-export interface Provider {
+export interface RevisionAccountExperienceCustomTranslation {
     /**
-     * The RP's client identifier, issued by the IdP.
+     * The locale (e.g. "en", "de")
      * @type {string}
-     * @memberof Provider
+     * @memberof RevisionAccountExperienceCustomTranslation
      */
-    client_id?: string;
+    locale: string;
     /**
-     * A full path of the IdP config file.
+     * The URL where the i18n json can be found
      * @type {string}
-     * @memberof Provider
+     * @memberof RevisionAccountExperienceCustomTranslation
      */
-    config_url?: string;
-    /**
-     * By specifying one of domain_hints values provided by the accounts endpoints,
-     * the FedCM dialog selectively shows the specified account.
-     * @type {string}
-     * @memberof Provider
-     */
-    domain_hint?: string;
-    /**
-     * Array of strings that specifies the user information ("name", " email",
-     * "picture") that RP needs IdP to share with them.
-     * 
-     * Note: Field API is supported by Chrome 132 and later.
-     * @type {Array<string>}
-     * @memberof Provider
-     */
-    fields?: Array<string>;
-    /**
-     * By specifying one of login_hints values provided by the accounts endpoints,
-     * the FedCM dialog selectively shows the specified account.
-     * @type {string}
-     * @memberof Provider
-     */
-    login_hint?: string;
-    /**
-     * A random string to ensure the response is issued for this specific request.
-     * Prevents replay attacks.
-     * @type {string}
-     * @memberof Provider
-     */
-    nonce?: string;
-    /**
-     * Custom object that allows to specify additional key-value parameters:
-     * scope: A string value containing additional permissions that RP needs to
-     * request, for example " drive.readonly calendar.readonly"
-     * nonce: A random string to ensure the response is issued for this specific
-     * request. Prevents replay attacks.
-     * 
-     * Other custom key-value parameters.
-     * 
-     * Note: parameters is supported from Chrome 132.
-     * @type {{ [key: string]: string; }}
-     * @memberof Provider
-     */
-    parameters?: { [key: string]: string; };
+    translations: string;
 }
 
 /**
- * Check if a given object implements the Provider interface.
+ * Check if a given object implements the RevisionAccountExperienceCustomTranslation interface.
  */
-export function instanceOfProvider(value: object): value is Provider {
+export function instanceOfRevisionAccountExperienceCustomTranslation(value: object): value is RevisionAccountExperienceCustomTranslation {
+    if (!('locale' in value) || value['locale'] === undefined) return false;
+    if (!('translations' in value) || value['translations'] === undefined) return false;
     return true;
 }
 
-export function ProviderFromJSON(json: any): Provider {
-    return ProviderFromJSONTyped(json, false);
+export function RevisionAccountExperienceCustomTranslationFromJSON(json: any): RevisionAccountExperienceCustomTranslation {
+    return RevisionAccountExperienceCustomTranslationFromJSONTyped(json, false);
 }
 
-export function ProviderFromJSONTyped(json: any, ignoreDiscriminator: boolean): Provider {
+export function RevisionAccountExperienceCustomTranslationFromJSONTyped(json: any, ignoreDiscriminator: boolean): RevisionAccountExperienceCustomTranslation {
     if (json == null) {
         return json;
     }
     return {
         
-        'client_id': json['client_id'] == null ? undefined : json['client_id'],
-        'config_url': json['config_url'] == null ? undefined : json['config_url'],
-        'domain_hint': json['domain_hint'] == null ? undefined : json['domain_hint'],
-        'fields': json['fields'] == null ? undefined : json['fields'],
-        'login_hint': json['login_hint'] == null ? undefined : json['login_hint'],
-        'nonce': json['nonce'] == null ? undefined : json['nonce'],
-        'parameters': json['parameters'] == null ? undefined : json['parameters'],
+        'locale': json['locale'],
+        'translations': json['translations'],
     };
 }
 
-export function ProviderToJSON(json: any): Provider {
-    return ProviderToJSONTyped(json, false);
+export function RevisionAccountExperienceCustomTranslationToJSON(json: any): RevisionAccountExperienceCustomTranslation {
+    return RevisionAccountExperienceCustomTranslationToJSONTyped(json, false);
 }
 
-export function ProviderToJSONTyped(value?: Provider | null, ignoreDiscriminator: boolean = false): any {
+export function RevisionAccountExperienceCustomTranslationToJSONTyped(value?: RevisionAccountExperienceCustomTranslation | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
 
     return {
         
-        'client_id': value['client_id'],
-        'config_url': value['config_url'],
-        'domain_hint': value['domain_hint'],
-        'fields': value['fields'],
-        'login_hint': value['login_hint'],
-        'nonce': value['nonce'],
-        'parameters': value['parameters'],
+        'locale': value['locale'],
+        'translations': value['translations'],
     };
 }
 
