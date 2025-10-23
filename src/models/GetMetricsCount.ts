@@ -14,89 +14,60 @@
 
 import { mapValues } from '../runtime';
 /**
- * Update Settings Flow with TOTP Method
+ * Response of the getIdentityCount endpoint
  * @export
- * @interface UpdateSettingsFlowWithTotpMethod
+ * @interface GetMetricsCount
  */
-export interface UpdateSettingsFlowWithTotpMethod {
+export interface GetMetricsCount {
     /**
-     * CSRFToken is the anti-CSRF token
+     * The total count
+     * @type {number}
+     * @memberof GetMetricsCount
+     */
+    readonly count: number;
+    /**
+     * Helper field to identify the service used for this response
      * @type {string}
-     * @memberof UpdateSettingsFlowWithTotpMethod
+     * @memberof GetMetricsCount
      */
-    csrf_token?: string;
-    /**
-     * Method
-     * 
-     * Should be set to "totp" when trying to add, update, or remove a totp pairing.
-     * @type {string}
-     * @memberof UpdateSettingsFlowWithTotpMethod
-     */
-    method: string;
-    /**
-     * ValidationTOTP must contain a valid TOTP based on the
-     * @type {string}
-     * @memberof UpdateSettingsFlowWithTotpMethod
-     */
-    totp_code?: string;
-    /**
-     * UnlinkTOTP if true will remove the TOTP pairing,
-     * effectively removing the credential. This can be used
-     * to set up a new TOTP device.
-     * @type {boolean}
-     * @memberof UpdateSettingsFlowWithTotpMethod
-     */
-    totp_unlink?: boolean;
-    /**
-     * Transient data to pass along to any webhooks
-     * @type {object}
-     * @memberof UpdateSettingsFlowWithTotpMethod
-     */
-    transient_payload?: object;
+    readonly service_name: string;
 }
 
 /**
- * Check if a given object implements the UpdateSettingsFlowWithTotpMethod interface.
+ * Check if a given object implements the GetMetricsCount interface.
  */
-export function instanceOfUpdateSettingsFlowWithTotpMethod(value: object): value is UpdateSettingsFlowWithTotpMethod {
-    if (!('method' in value) || value['method'] === undefined) return false;
+export function instanceOfGetMetricsCount(value: object): value is GetMetricsCount {
+    if (!('count' in value) || value['count'] === undefined) return false;
+    if (!('service_name' in value) || value['service_name'] === undefined) return false;
     return true;
 }
 
-export function UpdateSettingsFlowWithTotpMethodFromJSON(json: any): UpdateSettingsFlowWithTotpMethod {
-    return UpdateSettingsFlowWithTotpMethodFromJSONTyped(json, false);
+export function GetMetricsCountFromJSON(json: any): GetMetricsCount {
+    return GetMetricsCountFromJSONTyped(json, false);
 }
 
-export function UpdateSettingsFlowWithTotpMethodFromJSONTyped(json: any, ignoreDiscriminator: boolean): UpdateSettingsFlowWithTotpMethod {
+export function GetMetricsCountFromJSONTyped(json: any, ignoreDiscriminator: boolean): GetMetricsCount {
     if (json == null) {
         return json;
     }
     return {
         
-        'csrf_token': json['csrf_token'] == null ? undefined : json['csrf_token'],
-        'method': json['method'],
-        'totp_code': json['totp_code'] == null ? undefined : json['totp_code'],
-        'totp_unlink': json['totp_unlink'] == null ? undefined : json['totp_unlink'],
-        'transient_payload': json['transient_payload'] == null ? undefined : json['transient_payload'],
+        'count': json['count'],
+        'service_name': json['service_name'],
     };
 }
 
-export function UpdateSettingsFlowWithTotpMethodToJSON(json: any): UpdateSettingsFlowWithTotpMethod {
-    return UpdateSettingsFlowWithTotpMethodToJSONTyped(json, false);
+export function GetMetricsCountToJSON(json: any): GetMetricsCount {
+    return GetMetricsCountToJSONTyped(json, false);
 }
 
-export function UpdateSettingsFlowWithTotpMethodToJSONTyped(value?: UpdateSettingsFlowWithTotpMethod | null, ignoreDiscriminator: boolean = false): any {
+export function GetMetricsCountToJSONTyped(value?: Omit<GetMetricsCount, 'count'|'service_name'> | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
 
     return {
         
-        'csrf_token': value['csrf_token'],
-        'method': value['method'],
-        'totp_code': value['totp_code'],
-        'totp_unlink': value['totp_unlink'],
-        'transient_payload': value['transient_payload'],
     };
 }
 
