@@ -1,23 +1,22 @@
 
-# ActiveProjectInConsole
+# CreateOnboardingLinkResponse
 
-The Active Project ID
 
 ## Properties
 
 Name | Type
 ------------ | -------------
-`project_id` | string
+`onboarding_portal_token` | string
 
 ## Example
 
 ```typescript
-import type { ActiveProjectInConsole } from '@ory/client-fetch'
+import type { CreateOnboardingLinkResponse } from '@ory/client-fetch'
 
 // TODO: Update the object below with actual values
 const example = {
-  "project_id": null,
-} satisfies ActiveProjectInConsole
+  "onboarding_portal_token": null,
+} satisfies CreateOnboardingLinkResponse
 
 console.log(example)
 
@@ -26,7 +25,7 @@ const exampleJSON: string = JSON.stringify(example)
 console.log(exampleJSON)
 
 // Parse the JSON string back to an object
-const exampleParsed = JSON.parse(exampleJSON) as ActiveProjectInConsole
+const exampleParsed = JSON.parse(exampleJSON) as CreateOnboardingLinkResponse
 console.log(exampleParsed)
 ```
 

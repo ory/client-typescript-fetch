@@ -1,23 +1,32 @@
 
-# SetActiveProjectInConsoleBody
+# WorkspaceOrganization
 
-Set active project in the Ory Network Console Request Body
 
 ## Properties
 
 Name | Type
 ------------ | -------------
-`project_id` | string
+`active_link` | [OnboardingPortalLink](OnboardingPortalLink.md)
+`created_at` | Date
+`domains` | Array&lt;string&gt;
+`id` | string
+`label` | string
+`providers` | Array&lt;string&gt;
 
 ## Example
 
 ```typescript
-import type { SetActiveProjectInConsoleBody } from '@ory/client-fetch'
+import type { WorkspaceOrganization } from '@ory/client-fetch'
 
 // TODO: Update the object below with actual values
 const example = {
-  "project_id": null,
-} satisfies SetActiveProjectInConsoleBody
+  "active_link": null,
+  "created_at": null,
+  "domains": null,
+  "id": null,
+  "label": null,
+  "providers": null,
+} satisfies WorkspaceOrganization
 
 console.log(example)
 
@@ -26,7 +35,7 @@ const exampleJSON: string = JSON.stringify(example)
 console.log(exampleJSON)
 
 // Parse the JSON string back to an object
-const exampleParsed = JSON.parse(exampleJSON) as SetActiveProjectInConsoleBody
+const exampleParsed = JSON.parse(exampleJSON) as WorkspaceOrganization
 console.log(exampleParsed)
 ```
 
