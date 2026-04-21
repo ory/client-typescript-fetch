@@ -14,60 +14,58 @@
 
 import { mapValues } from '../runtime';
 /**
- * Recovery codes can be used once and are invalidated after use.
+ * Represents a single selectable value for an input whose JSON schema
+ * defined an `enum`. The value is always a scalar JSON type (string, number,
+ * or boolean) serialized verbatim from the schema. When present, clients
+ * should render the parent input as a select/dropdown.
  * @export
- * @interface IdentityCredentialsLookupSecretCode
+ * @interface UiNodeInputAttributesOption
  */
-export interface IdentityCredentialsLookupSecretCode {
+export interface UiNodeInputAttributesOption {
     /**
-     * A recovery code
-     * @type {string}
-     * @memberof IdentityCredentialsLookupSecretCode
+     * The value that will be submitted when this option is picked.
+     * It is serialized verbatim from the JSON schema `enum` entry, so it is
+     * always a scalar JSON value (string, number, or boolean).
+     * @type {any}
+     * @memberof UiNodeInputAttributesOption
      */
-    code?: string;
-    /**
-     * 
-     * @type {Date}
-     * @memberof IdentityCredentialsLookupSecretCode
-     */
-    used_at?: Date;
+    value: any | null;
 }
 
 /**
- * Check if a given object implements the IdentityCredentialsLookupSecretCode interface.
+ * Check if a given object implements the UiNodeInputAttributesOption interface.
  */
-export function instanceOfIdentityCredentialsLookupSecretCode(value: object): value is IdentityCredentialsLookupSecretCode {
+export function instanceOfUiNodeInputAttributesOption(value: object): value is UiNodeInputAttributesOption {
+    if (!('value' in value) || value['value'] === undefined) return false;
     return true;
 }
 
-export function IdentityCredentialsLookupSecretCodeFromJSON(json: any): IdentityCredentialsLookupSecretCode {
-    return IdentityCredentialsLookupSecretCodeFromJSONTyped(json, false);
+export function UiNodeInputAttributesOptionFromJSON(json: any): UiNodeInputAttributesOption {
+    return UiNodeInputAttributesOptionFromJSONTyped(json, false);
 }
 
-export function IdentityCredentialsLookupSecretCodeFromJSONTyped(json: any, ignoreDiscriminator: boolean): IdentityCredentialsLookupSecretCode {
+export function UiNodeInputAttributesOptionFromJSONTyped(json: any, ignoreDiscriminator: boolean): UiNodeInputAttributesOption {
     if (json == null) {
         return json;
     }
     return {
         
-        'code': json['code'] == null ? undefined : json['code'],
-        'used_at': json['used_at'] == null ? undefined : (new Date(json['used_at'])),
+        'value': json['value'],
     };
 }
 
-export function IdentityCredentialsLookupSecretCodeToJSON(json: any): IdentityCredentialsLookupSecretCode {
-    return IdentityCredentialsLookupSecretCodeToJSONTyped(json, false);
+export function UiNodeInputAttributesOptionToJSON(json: any): UiNodeInputAttributesOption {
+    return UiNodeInputAttributesOptionToJSONTyped(json, false);
 }
 
-export function IdentityCredentialsLookupSecretCodeToJSONTyped(value?: IdentityCredentialsLookupSecretCode | null, ignoreDiscriminator: boolean = false): any {
+export function UiNodeInputAttributesOptionToJSONTyped(value?: UiNodeInputAttributesOption | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
 
     return {
         
-        'code': value['code'],
-        'used_at': value['used_at'] == null ? value['used_at'] : value['used_at'].toISOString(),
+        'value': value['value'],
     };
 }
 
