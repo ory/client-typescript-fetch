@@ -1,23 +1,29 @@
 
-# ConsistencyRequestParameters
+# UpdateLoginFlowWithDeviceAuthnMethod
 
-Control API consistency guarantees
+No CSRF token since this method may not be used from the browser.
 
 ## Properties
 
 Name | Type
 ------------ | -------------
-`consistency` | string
+`client_key_id` | string
+`method` | string
+`signature` | string
+`transient_payload` | object
 
 ## Example
 
 ```typescript
-import type { ConsistencyRequestParameters } from '@ory/client-fetch'
+import type { UpdateLoginFlowWithDeviceAuthnMethod } from '@ory/client-fetch'
 
 // TODO: Update the object below with actual values
 const example = {
-  "consistency": null,
-} satisfies ConsistencyRequestParameters
+  "client_key_id": null,
+  "method": null,
+  "signature": null,
+  "transient_payload": null,
+} satisfies UpdateLoginFlowWithDeviceAuthnMethod
 
 console.log(example)
 
@@ -26,7 +32,7 @@ const exampleJSON: string = JSON.stringify(example)
 console.log(exampleJSON)
 
 // Parse the JSON string back to an object
-const exampleParsed = JSON.parse(exampleJSON) as ConsistencyRequestParameters
+const exampleParsed = JSON.parse(exampleJSON) as UpdateLoginFlowWithDeviceAuthnMethod
 console.log(exampleParsed)
 ```
 
