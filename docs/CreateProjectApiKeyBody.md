@@ -1,5 +1,5 @@
 
-# CreateProjectApiKeyRequest
+# CreateProjectApiKeyBody
 
 
 ## Properties
@@ -12,13 +12,13 @@ Name | Type
 ## Example
 
 ```typescript
-import type { CreateProjectApiKeyRequest } from '@ory/client-fetch'
+import type { CreateProjectApiKeyBody } from '@ory/client-fetch'
 
 // TODO: Update the object below with actual values
 const example = {
   "expires_at": null,
   "name": null,
-} satisfies CreateProjectApiKeyRequest
+} satisfies CreateProjectApiKeyBody
 
 console.log(example)
 
@@ -27,7 +27,7 @@ const exampleJSON: string = JSON.stringify(example)
 console.log(exampleJSON)
 
 // Parse the JSON string back to an object
-const exampleParsed = JSON.parse(exampleJSON) as CreateProjectApiKeyRequest
+const exampleParsed = JSON.parse(exampleJSON) as CreateProjectApiKeyBody
 console.log(exampleParsed)
 ```
 
