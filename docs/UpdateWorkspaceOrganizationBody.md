@@ -1,22 +1,22 @@
 
-# UpdateSettingsFlowWithDeviceAuthnMethodDelete
+# UpdateWorkspaceOrganizationBody
 
 
 ## Properties
 
 Name | Type
 ------------ | -------------
-`client_key_id` | string
+`session_lifespan` | string
 
 ## Example
 
 ```typescript
-import type { UpdateSettingsFlowWithDeviceAuthnMethodDelete } from '@ory/client-fetch'
+import type { UpdateWorkspaceOrganizationBody } from '@ory/client-fetch'
 
 // TODO: Update the object below with actual values
 const example = {
-  "client_key_id": null,
-} satisfies UpdateSettingsFlowWithDeviceAuthnMethodDelete
+  "session_lifespan": 24h,
+} satisfies UpdateWorkspaceOrganizationBody
 
 console.log(example)
 
@@ -25,7 +25,7 @@ const exampleJSON: string = JSON.stringify(example)
 console.log(exampleJSON)
 
 // Parse the JSON string back to an object
-const exampleParsed = JSON.parse(exampleJSON) as UpdateSettingsFlowWithDeviceAuthnMethodDelete
+const exampleParsed = JSON.parse(exampleJSON) as UpdateWorkspaceOrganizationBody
 console.log(exampleParsed)
 ```
 
