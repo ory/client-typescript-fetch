@@ -1,24 +1,26 @@
 
-# Plan
+# WorkspaceContactRecipient
 
 
 ## Properties
 
 Name | Type
 ------------ | -------------
+`email` | string
+`identity_id` | string
 `name` | string
-`version` | number
 
 ## Example
 
 ```typescript
-import type { Plan } from '@ory/client-fetch'
+import type { WorkspaceContactRecipient } from '@ory/client-fetch'
 
 // TODO: Update the object below with actual values
 const example = {
+  "email": null,
+  "identity_id": null,
   "name": null,
-  "version": null,
-} satisfies Plan
+} satisfies WorkspaceContactRecipient
 
 console.log(example)
 
@@ -27,7 +29,7 @@ const exampleJSON: string = JSON.stringify(example)
 console.log(exampleJSON)
 
 // Parse the JSON string back to an object
-const exampleParsed = JSON.parse(exampleJSON) as Plan
+const exampleParsed = JSON.parse(exampleJSON) as WorkspaceContactRecipient
 console.log(exampleParsed)
 ```
 
